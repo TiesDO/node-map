@@ -7,7 +7,7 @@ export default () => {
 				<meta charSet='utf-8' />
 				<title>Qwik Blank App</title>
 			</head>
-			<body style='width: 200px; height: 200px'>
+			<body style='width: 1000px; height: 600px'>
 				<MapVisual />
 			</body>
 		</>
