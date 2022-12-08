@@ -30,13 +30,6 @@ export const MapVisual = component$(() => {
 				'--bgc': gridSettings.mapBackground,
 				'--gc': gridSettings.gridColor,
 				'--gs': `${gridSettings.gridSize}px`,
-			}}>
-			<button
-				onClick$={() => {
-					gridSettings.gridSize = gridSettings.gridSize + 5;
-				}}>
-				test
-			</button>
-		</div>
+			}}></div>
 	);
 });
