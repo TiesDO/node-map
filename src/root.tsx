@@ -8,7 +8,7 @@ export default () => {
 				<title>Qwik Blank App</title>
 			</head>
 			<body style='width: 200px; height: 200px'>
-				<MapVisual gridSize={10} />
+				<MapVisual />
 			</body>
 		</>
 	);
