@@ -24,6 +24,9 @@
 	"np": {
 		"tests": false
 	},
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org"
+	},
 	"scripts": {
 		"build": "qwik build",
 		"build.lib": "vite build --mode lib",
