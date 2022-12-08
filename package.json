@@ -1,5 +1,5 @@
 {
-	"name": "my-qwik-library-name",
+	"name": "node-map",
 	"version": "0.0.2",
 	"description": "Create a reusable Qwik component library",
 	"main": "./lib/index.qwik.mjs",
@@ -22,10 +22,13 @@
 	"private": false,
 	"type": "module",
 	"np": {
-		"tests": false
+		"branch": "master",
+		"tests": false,
+		"preview": false
 	},
 	"publishConfig": {
-		"registry": "https://registry.npmjs.org"
+		"registry": "https://registry.npmjs.org",
+		"access": "public"
 	},
 	"scripts": {
 		"build": "qwik build",
