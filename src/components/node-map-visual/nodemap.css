@@ -1,13 +1,9 @@
 .nodemap-container {
-	--background-color: #333;
-	--grid-color: #ccc;
-	--grid-size: 15px;
-
-	background-color: var(--background-color);
+	background-color: var(--bgc);
 	width: 100%;
 	height: 100%;
 
-	background-image: linear-gradient(var(--grid-color) 0.1em, transparent 0.1em),
-		linear-gradient(90deg, var(--grid-color) 0.1em, transparent 0.1em);
-	background-size: var(--grid-size) var(--grid-size);
+	background-image: linear-gradient(var(--gc) 1px, transparent 1px),
+		linear-gradient(90deg, var(--gc) 1px, transparent 1px);
+	background-size: var(--gs) var(--gs);
 }
