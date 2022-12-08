@@ -8,5 +8,5 @@ export type MapVisualType = {
 export const MapVisual = component$((props: MapVisualType) => {
 	useStyles$(mainStyle);
 
-	return <div></div>;
+	return <div class='nodemap-container'></div>;
 });
