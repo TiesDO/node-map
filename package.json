@@ -1,6 +1,6 @@
 {
 	"name": "@tiesdenouden/node-map",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Create a reusable Qwik component library",
 	"main": "./lib/index.qwik.mjs",
 	"qwik": "./lib/index.qwik.mjs",
