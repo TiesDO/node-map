@@ -1,4 +1,7 @@
 import { $, QwikMouseEvent } from '@builder.io/qwik';
+import { getElementRelativePosition } from '../library/math';
+import { TextNodeProps } from '../node-map-visual/Node';
+import { NodeMapState } from '../node-map-visual/NodeMap';
 import { ToobarToolProps } from './toolbar';
 
 export const MoveTool: ToobarToolProps = {
@@ -18,28 +21,41 @@ export const MoveTool: ToobarToolProps = {
 			return;
 		}
 
-		// offset on node
-		const nodeRect = element.getBoundingClientRect();
-
-		const nodeOffset = {
-			x: nodeRect.x - e.clientX,
-			y: nodeRect.y - e.clientY,
-		};
-
+		const nodeOffset = getElementRelativePosition(e, element);
 		window.onmouseup = () => {
 			container.onmousemove = null;
 		};
 
 		container.onmousemove = (ev: MouseEvent) => {
-			const conRect = canvas.getBoundingClientRect();
+			const nextPosition = getElementRelativePosition(ev, canvas, nodeOffset);
 
-			element.style.left = ev.clientX - conRect.x + nodeOffset.x + 'px';
-			element.style.top = ev.clientY - conRect.y + nodeOffset.y + 'px';
+			element.style.left = nextPosition.x + 'px';
+			element.style.top = nextPosition.y + 'px';
 		};
 	}),
 };
 
 export const CreateTool: ToobarToolProps = {
 	name: 'create',
-	onMouseDown$: $(() => console.log('Create tool used')),
+	onMouseDown$: $((e: QwikMouseEvent, state: NodeMapState) => {
+		const canvas = (e.target as HTMLElement).closest<HTMLElement>(
+			'.nodemap-canvas'
+		);
+
+		if (!canvas) return;
+
+		const placementPos = getElementRelativePosition(e, canvas);
+
+		// create a new node
+		const tempNodeProps: TextNodeProps = {
+			text: 'new Node',
+			id: 'newNode',
+			x: placementPos.x,
+			y: placementPos.y,
+		};
+
+		state.nodes.push(tempNodeProps);
+
+		console.log(tempNodeProps);
+	}),
 };
