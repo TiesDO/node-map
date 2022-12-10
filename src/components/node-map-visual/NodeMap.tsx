@@ -60,7 +60,7 @@ export const NodeMap = component$(() => {
 
 			<div class='nodemap-canvas' {...eventMap} style={styleVariables}>
 				{/* Test Node */}
-				<TextNode text='hey' />
+				<TextNode id='myNodeId' text='hey' />
 			</div>
 
 			<NodePropertiesEditor />
