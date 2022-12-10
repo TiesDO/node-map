@@ -10,7 +10,7 @@ import {
 import { ToobarToolProps, Toolbar } from '../toolbar/toolbar';
 import { CreateTool, MoveTool } from '../toolbar/prefab-tools';
 import mainStyle from './nodemap.css?inline';
-import { TextNode } from './Node';
+import { TextNode, TextNodeProps } from './Node';
 import { NodePropertiesEditor } from './NodePropertiesEditor';
 
 export const NodeMapContext = createContext<NodeMapState>('nodemap');
@@ -21,6 +21,8 @@ export type NodeMapState = {
 	gridColor: string;
 
 	activeTool: ToobarToolProps | null;
+
+	nodes: TextNodeProps[];
 };
 
 export const NodeMapSettingsDefault: NodeMapState = {
@@ -29,6 +31,8 @@ export const NodeMapSettingsDefault: NodeMapState = {
 	gridColor: '#555',
 
 	activeTool: null,
+
+	nodes: [],
 };
 
 export const NodeMap = component$(() => {
@@ -59,8 +63,9 @@ export const NodeMap = component$(() => {
 			<Toolbar tools={[MoveTool, CreateTool]} />
 
 			<div class='nodemap-canvas' {...eventMap} style={styleVariables}>
-				{/* Test Node */}
-				<TextNode id='myNodeId' text='hey' />
+				{mapState.nodes.map((n) => {
+					return <TextNode {...n} />;
+				})}
 			</div>
 
 			<NodePropertiesEditor />
