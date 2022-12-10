@@ -39,7 +39,9 @@ export const NodeMap = component$(() => {
 	useStyles$(mainStyle);
 
 	// set store to default
-	const mapState = useStore<NodeMapState>(NodeMapSettingsDefault);
+	const mapState = useStore<NodeMapState>(NodeMapSettingsDefault, {
+		recursive: true,
+	});
 
 	// provide context to all children
 	useContextProvider(NodeMapContext, mapState);
