@@ -36,6 +36,8 @@
 
 	cursor: var(--cursor);
 
+	position: absolute;
+
 	padding: 1.5rem;
 	background-color: white;
 
@@ -43,6 +45,9 @@
 	height: max-content;
 
 	user-select: none;
+
+	left: 60px;
+	top: 60px;
 
 	border-radius: 0.5rem;
 }

@@ -5,25 +5,36 @@ export const MoveTool: ToobarToolProps = {
 	name: 'move',
 	onMouseDown$: $((e: QwikMouseEvent) => {
 		const element = e.target as HTMLElement;
-		const container = element.closest<HTMLElement>('.nodemap-container');
 
-		if (container === null) {
+		// check if it is a node
+		if (!element.classList.contains('node')) {
 			return;
 		}
+
+		const container = element.closest<HTMLElement>('.nodemap-container');
+		const canvas = element.closest<HTMLElement>('.nodemap-canvas');
+
+		if (container === null || canvas === null) {
+			return;
+		}
+
+		// offset on node
+		const nodeRect = element.getBoundingClientRect();
+
+		const nodeOffset = {
+			x: nodeRect.x - e.clientX,
+			y: nodeRect.y - e.clientY,
+		};
 
 		window.onmouseup = () => {
 			container.onmousemove = null;
 		};
 
 		container.onmousemove = (ev: MouseEvent) => {
-			element.style.setProperty(
-				'--px',
-				`${element.style.left + ev.movementX} px`
-			);
-			element.style.setProperty(
-				'--py',
-				`${element.style.top + ev.movementY} px`
-			);
+			const conRect = canvas.getBoundingClientRect();
+
+			element.style.left = ev.clientX - conRect.x + nodeOffset.x + 'px';
+			element.style.top = ev.clientY - conRect.y + nodeOffset.y + 'px';
 		};
 	}),
 };
