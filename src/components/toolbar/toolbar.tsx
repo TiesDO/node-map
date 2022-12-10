@@ -1,24 +1,51 @@
-import { component$, Slot, useStyles$, useStore } from '@builder.io/qwik';
+import {
+	component$,
+	useStyles$,
+	useStore,
+	$,
+	PropFunction,
+} from '@builder.io/qwik';
 
 import toolbarStyle from './toolbar.css?inline';
 
-export type ToolbarProps = {};
+export type ToolbarProps = {
+	nodeMapId?: string;
+	tools: ToobarToolProps[];
+};
 
 export type ToolbarState = {
 	x: number;
 	y: number;
+	inDrag: boolean;
 };
 
-export const Toolbar = component$(() => {
+export const ToolbarDefaultState = {
+	x: 15,
+	y: 15,
+	inDrag: false,
+};
+
+export const Toolbar = component$((props: ToolbarProps) => {
 	useStyles$(toolbarStyle);
 
-	const state = useStore({ x: 15, y: 15 });
+	// set the default state
+	const state = useStore(ToolbarDefaultState);
+
+	// client effect for dragging
 
 	return (
 		<div class='toolbar' style={`--px: ${state.x}px; --py: ${state.y}px`}>
-			<div class='dragpoint'></div>
+			<div
+				class='dragpoint'
+				onMouseDown$={(e) => {
+					if (e.button === 1) {
+						state.inDrag = true;
+					}
+				}}></div>
 			<div class='tools'>
-				<Slot name='tools' />
+				{props.tools.map((t) => {
+					return <ToolbarTool {...t} />;
+				})}
 			</div>
 		</div>
 	);
@@ -26,11 +53,11 @@ export const Toolbar = component$(() => {
 
 export type ToobarToolProps = {
 	name: string;
-	onMouseDown?: () => void;
-	onMouseUp?: () => void;
-	onDragStart?: () => void;
-	onDragMove?: () => void;
-	onDragEnd?: () => void;
+	onMouseDown$?: PropFunction<() => void>;
+	onMouseUp$?: PropFunction<() => void>;
+	onDragStart$?: PropFunction<() => void>;
+	onDragMove$?: PropFunction<() => void>;
+	onDragEnd$?: PropFunction<() => void>;
 };
 
 export const ToolbarTool = component$((props: ToobarToolProps) => {

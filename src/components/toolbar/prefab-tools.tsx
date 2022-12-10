@@ -1,5 +1,12 @@
-import { ToolbarTool } from './toolbar';
+import { $ } from '@builder.io/qwik';
+import { ToobarToolProps } from './toolbar';
 
-export const MoveTool = <ToolbarTool name='move' q:slot='tools' />;
+export const MoveTool: ToobarToolProps = {
+	name: 'move',
+	onMouseDown$: $(() => console.log('Move tool used')),
+};
 
-export const CreateTool = <ToolbarTool name='create' q:slot='tools' />;
+export const CreateTool: ToobarToolProps = {
+	name: 'create',
+	onMouseDown$: $(() => console.log('Create tool used')),
+};
