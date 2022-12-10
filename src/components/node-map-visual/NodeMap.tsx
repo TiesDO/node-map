@@ -49,7 +49,7 @@ export const NodeMap = component$(() => {
 	const eventMap = {
 		onMouseDown$: $((e: QwikMouseEvent) => {
 			if (mapState.activeTool?.onMouseDown$) {
-				mapState.activeTool?.onMouseDown$(e);
+				mapState.activeTool?.onMouseDown$(e, mapState);
 			}
 		}),
 	};

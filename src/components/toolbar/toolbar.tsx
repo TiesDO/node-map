@@ -47,7 +47,9 @@ export const Toolbar = component$((props: ToolbarProps) => {
 
 export type ToobarToolProps = {
 	name: string;
-	onMouseDown$?: PropFunction<(event: QwikMouseEvent) => void>;
+	onMouseDown$?: PropFunction<
+		(event: QwikMouseEvent, state: NodeMapState) => void
+	>;
 };
 
 export const ToolbarTool = component$((props: ToobarToolProps) => {
