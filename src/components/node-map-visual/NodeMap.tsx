@@ -40,6 +40,12 @@ export const NodeMap = component$(() => {
 	// provide context to all children
 	useContextProvider(NodeMapContext, mapState);
 
+	const styleVariables = {
+		'--bgc': mapState.mapBackground,
+		'--gc': mapState.gridColor,
+		'--gs': `${mapState.gridSize}px`,
+	};
+
 	const eventMap = {
 		onMouseDown$: $((e: QwikMouseEvent) => {
 			if (mapState.activeTool?.onMouseDown$) {
@@ -52,14 +58,7 @@ export const NodeMap = component$(() => {
 		<div class='nodemap-container'>
 			<Toolbar tools={[MoveTool, CreateTool]} />
 
-			<div
-				class='nodemap-canvas'
-				{...eventMap}
-				style={{
-					'--bgc': mapState.mapBackground,
-					'--gc': mapState.gridColor,
-					'--gs': `${mapState.gridSize}px`,
-				}}>
+			<div class='nodemap-canvas' {...eventMap} style={styleVariables}>
 				{/* Test Node */}
 				<TextNode text='hey' />
 			</div>

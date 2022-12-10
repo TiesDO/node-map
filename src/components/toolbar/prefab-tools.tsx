@@ -3,9 +3,7 @@ import { ToobarToolProps } from './toolbar';
 
 export const MoveTool: ToobarToolProps = {
 	name: 'move',
-	onMouseDown$: $((e: QwikMouseEvent) => {
-		console.log('using the move tool');
-	}),
+	onMouseDown$: $((e: QwikMouseEvent) => {}),
 };
 
 export const CreateTool: ToobarToolProps = {
