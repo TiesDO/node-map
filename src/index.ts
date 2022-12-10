@@ -1,1 +1,1 @@
-export { MapVisual } from './components/node-map-visual/mapVisual';
+export { NodeMap } from './components/node-map-visual/NodeMap';
