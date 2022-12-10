@@ -54,8 +54,7 @@ export const CreateTool: ToobarToolProps = {
 			y: placementPos.y,
 		};
 
+		// add node to context
 		state.nodes.push(tempNodeProps);
-
-		console.log(tempNodeProps);
 	}),
 };
