@@ -1,4 +1,5 @@
 import { $, QwikMouseEvent } from '@builder.io/qwik';
+import { TextNodeProps } from '../node-map-visual/Node';
 import { ToobarToolProps } from './toolbar';
 
 export const MoveTool: ToobarToolProps = {
@@ -41,5 +42,13 @@ export const MoveTool: ToobarToolProps = {
 
 export const CreateTool: ToobarToolProps = {
 	name: 'create',
-	onMouseDown$: $(() => console.log('Create tool used')),
+	onMouseDown$: $((e: QwikMouseEvent) => {
+		// create a new node
+		const tempNodeProps: TextNodeProps = {
+			text: 'new Node',
+			id: 'newNode',
+		};
+
+		const canvas = e.target as HTMLDivElement;
+	}),
 };
