@@ -1,12 +1,30 @@
 import { $, QwikMouseEvent } from '@builder.io/qwik';
-import { NodeMapState } from '../node-map-visual/NodeMap';
 import { ToobarToolProps } from './toolbar';
 
 export const MoveTool: ToobarToolProps = {
 	name: 'move',
-	onMouseDown$: $((e: QwikMouseEvent, state: NodeMapState) => {
-		// select the node
-		console.log(state);
+	onMouseDown$: $((e: QwikMouseEvent) => {
+		const element = e.target as HTMLElement;
+		const container = element.closest<HTMLElement>('.nodemap-container');
+
+		if (container === null) {
+			return;
+		}
+
+		window.onmouseup = () => {
+			container.onmousemove = null;
+		};
+
+		container.onmousemove = (ev: MouseEvent) => {
+			element.style.setProperty(
+				'--px',
+				`${element.style.left + ev.movementX} px`
+			);
+			element.style.setProperty(
+				'--py',
+				`${element.style.top + ev.movementY} px`
+			);
+		};
 	}),
 };
 
