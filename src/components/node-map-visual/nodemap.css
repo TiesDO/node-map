@@ -1,4 +1,6 @@
 .nodemap-container {
+	position: relative;
+
 	background-color: var(--bgc);
 	width: 100%;
 	height: 100%;
