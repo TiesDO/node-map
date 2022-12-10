@@ -1,4 +1,42 @@
 .toolbar {
-	background-color: blue;
-	padding: 1em;
+	--bg: rgb(231, 231, 231);
+	--dbg: rgb(190, 190, 190);
+	--dbg-h: rgb(190, 190, 190);
+
+	--px: 10px;
+	--py: 10px;
+
+	position: absolute;
+	top: var(--py);
+	left: var(--px);
+
+	background-color: var(--bg);
+	display: grid;
+	grid-template-columns: 10px auto;
+
+	height: 30px;
+	width: max-content;
+
+	overflow: hidden;
+}
+
+.toolbar .dragpoint {
+	cursor: move;
+	width: 100%;
+	background-color: var(--dbg);
+}
+
+.toolbar .tools {
+	padding: 0.2rem;
+
+	display: flex;
+	gap: 0.2rem;
+}
+
+.toolbar .tools .tool {
+	aspect-ratio: 1 / 1;
+}
+
+.toolbar .tools .tool:hover {
+	background-color: var(--dbg-h);
 }
