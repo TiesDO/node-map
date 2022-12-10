@@ -2,9 +2,10 @@ import {
 	component$,
 	useStyles$,
 	useStore,
-	$,
 	PropFunction,
+	useContext,
 } from '@builder.io/qwik';
+import { NodeMapContext, NodeMapState } from '../node-map-visual/NodeMap';
 
 import toolbarStyle from './toolbar.css?inline';
 
@@ -35,13 +36,7 @@ export const Toolbar = component$((props: ToolbarProps) => {
 
 	return (
 		<div class='toolbar' style={`--px: ${state.x}px; --py: ${state.y}px`}>
-			<div
-				class='dragpoint'
-				onMouseDown$={(e) => {
-					if (e.button === 1) {
-						state.inDrag = true;
-					}
-				}}></div>
+			<div id='dragPoint' class='dragpoint'></div>
 			<div class='tools'>
 				{props.tools.map((t) => {
 					return <ToolbarTool {...t} />;
@@ -62,6 +57,10 @@ export type ToobarToolProps = {
 
 export const ToolbarTool = component$((props: ToobarToolProps) => {
 	const name: string = props.name[0] + props.name[1];
+
+	const nodemap = useContext<NodeMapState>(NodeMapContext);
+
+	nodemap.activeTool = props;
 
 	return <div class='tool'>{name.toUpperCase()}</div>;
 });
