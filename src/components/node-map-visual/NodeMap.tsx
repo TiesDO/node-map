@@ -23,6 +23,8 @@ export type NodeMapState = {
 	activeTool: ToobarToolProps | null;
 
 	nodes: TextNodeProps[];
+
+	selection: TextNodeProps[];
 };
 
 export const NodeMapSettingsDefault: NodeMapState = {
@@ -33,6 +35,7 @@ export const NodeMapSettingsDefault: NodeMapState = {
 	activeTool: null,
 
 	nodes: [],
+	selection: [],
 };
 
 export const NodeMap = component$(() => {
