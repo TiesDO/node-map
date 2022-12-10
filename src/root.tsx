@@ -1,4 +1,4 @@
-import { MapVisual } from './components/node-map-visual/mapVisual';
+import { NodeMap } from './components/node-map-visual/NodeMap';
 
 export default () => {
 	return (
@@ -7,8 +7,8 @@ export default () => {
 				<meta charSet='utf-8' />
 				<title>Qwik Blank App</title>
 			</head>
-			<body style='width: 1000px; height: 600px'>
-				<MapVisual />
+			<body style='width: 100vw; height: 100vh; margin: 0'>
+				<NodeMap />
 			</body>
 		</>
 	);
