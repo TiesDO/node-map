@@ -4,11 +4,14 @@ import {
 	useStore,
 	createContext,
 	useContextProvider,
-	Slot,
+	$,
+	QwikMouseEvent,
 } from '@builder.io/qwik';
 import { ToobarToolProps, Toolbar } from '../toolbar/toolbar';
 import { CreateTool, MoveTool } from '../toolbar/prefab-tools';
 import mainStyle from './nodemap.css?inline';
+import { TextNode } from './Node';
+import { NodePropertiesEditor } from './NodePropertiesEditor';
 
 export const NodeMapContext = createContext<NodeMapState>('nodemap');
 
@@ -37,38 +40,31 @@ export const NodeMap = component$(() => {
 	// provide context to all children
 	useContextProvider(NodeMapContext, mapState);
 
+	const eventMap = {
+		onMouseDown$: $((e: QwikMouseEvent) => {
+			if (mapState.activeTool?.onMouseDown$) {
+				mapState.activeTool?.onMouseDown$(e);
+			}
+		}),
+	};
+
 	return (
-		<div
-			class='nodemap-container'
-			style={{
-				'--bgc': mapState.mapBackground,
-				'--gc': mapState.gridColor,
-				'--gs': `${mapState.gridSize}px`,
-			}}>
-			<DraggableNode snapToGrid={false} dragTargetId='dragPoint'>
-				<Toolbar tools={[MoveTool, CreateTool]} />
-			</DraggableNode>
-		</div>
-	);
-});
+		<div class='nodemap-container'>
+			<Toolbar tools={[MoveTool, CreateTool]} />
 
-export type DraggableNodeProps = {
-	dragTargetId?: string;
-	snapToGrid: boolean;
-};
+			<div
+				class='nodemap-canvas'
+				{...eventMap}
+				style={{
+					'--bgc': mapState.mapBackground,
+					'--gc': mapState.gridColor,
+					'--gs': `${mapState.gridSize}px`,
+				}}>
+				{/* Test Node */}
+				<TextNode text='hey' />
+			</div>
 
-export const DraggableNode = component$((props: DraggableNodeProps) => {
-	return (
-		<div
-			onClick$={(e) => {
-				console.log('draggable item was clicked');
-
-				const element: HTMLElement = e.target as HTMLElement;
-				if (props.dragTargetId === element.id) {
-					console.log('clicked target element');
-				}
-			}}>
-			<Slot />
+			<NodePropertiesEditor />
 		</div>
 	);
 });

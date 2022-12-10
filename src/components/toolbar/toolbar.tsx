@@ -4,6 +4,10 @@ import {
 	useStore,
 	PropFunction,
 	useContext,
+	useSignal,
+	$,
+	useClientEffect$,
+	QwikMouseEvent,
 } from '@builder.io/qwik';
 import { NodeMapContext, NodeMapState } from '../node-map-visual/NodeMap';
 
@@ -32,35 +36,50 @@ export const Toolbar = component$((props: ToolbarProps) => {
 	// set the default state
 	const state = useStore(ToolbarDefaultState);
 
-	// client effect for dragging
-
 	return (
 		<div class='toolbar' style={`--px: ${state.x}px; --py: ${state.y}px`}>
-			<div id='dragPoint' class='dragpoint'></div>
-			<div class='tools'>
-				{props.tools.map((t) => {
-					return <ToolbarTool {...t} />;
-				})}
-			</div>
+			{props.tools.map((t) => {
+				return <ToolbarTool key={t.name} {...t} />;
+			})}
 		</div>
 	);
 });
 
 export type ToobarToolProps = {
 	name: string;
-	onMouseDown$?: PropFunction<() => void>;
-	onMouseUp$?: PropFunction<() => void>;
-	onDragStart$?: PropFunction<() => void>;
-	onDragMove$?: PropFunction<() => void>;
-	onDragEnd$?: PropFunction<() => void>;
+	onMouseDown$?: PropFunction<(event: QwikMouseEvent) => void>;
+	// onMouseUp$?: PropFunction<(node: HTMLElement) => void>;
+	// onDragStart$?: PropFunction<(node: HTMLElement) => void>;
+	// onDragMove$?: PropFunction<(node: HTMLElement) => void>;
+	// onDragEnd$?: PropFunction<(node: HTMLElement) => void>;
 };
 
 export const ToolbarTool = component$((props: ToobarToolProps) => {
-	const name: string = props.name[0] + props.name[1];
-
 	const nodemap = useContext<NodeMapState>(NodeMapContext);
 
-	nodemap.activeTool = props;
+	const node = useSignal<HTMLDivElement>();
 
-	return <div class='tool'>{name.toUpperCase()}</div>;
+	const handleClick = $(() => {
+		// do nothing if already active
+		if (nodemap.activeTool?.name !== props.name) {
+			nodemap.activeTool = props;
+		}
+	});
+
+	useClientEffect$(({ track }) => {
+		const value = track(() => nodemap.activeTool);
+
+		// check if the attribute is set
+		if (node.value?.dataset?.active) {
+			node.value.dataset.active = `${value?.name === props.name}`;
+		}
+	});
+
+	const name: string = props.name[0] + props.name[1];
+
+	return (
+		<div onClick$={handleClick} class='tool' ref={node} data-active='false'>
+			{name.toUpperCase()}
+		</div>
+	);
 });
