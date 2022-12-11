@@ -41,6 +41,7 @@ export const NodePropertiesEditor = component$(() => {
 		const props: NodePropertyEditProps[] = [];
 
 		for (const [key] of Object.entries(node)) {
+			if (!node.editable.includes(key)) continue;
 			props.push({
 				propname: key,
 				state: state.activeNode,
