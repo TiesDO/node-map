@@ -4,6 +4,8 @@ import { TextNodeProps } from '../node-map-visual/Node';
 import { NodeMapState } from '../node-map-visual/NodeMap';
 import { ToobarToolProps } from './toolbar';
 
+import { v4 } from 'uuid';
+
 export const MoveTool: ToobarToolProps = {
 	name: 'move',
 	onMouseDown$: $((e: QwikMouseEvent) => {
@@ -49,13 +51,12 @@ export const CreateTool: ToobarToolProps = {
 		// create a new node
 		const tempNodeProps: TextNodeProps = {
 			text: 'new Node',
-			id: 'newNode',
+			id: v4(),
 			x: placementPos.x,
 			y: placementPos.y,
 		};
 
+		// add node to context
 		state.nodes.push(tempNodeProps);
-
-		console.log(tempNodeProps);
 	}),
 };

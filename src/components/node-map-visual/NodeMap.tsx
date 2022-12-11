@@ -69,7 +69,7 @@ export const NodeMap = component$(() => {
 
 			<div class='nodemap-canvas' {...eventMap} style={styleVariables}>
 				{mapState.nodes.map((n) => {
-					return <TextNode {...n} />;
+					return <TextNode key={n.id} {...n} />;
 				})}
 			</div>
 
