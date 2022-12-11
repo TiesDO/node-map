@@ -68,14 +68,13 @@ export const NodeMap = component$(() => {
 
 	return (
 		<div class='nodemap-container'>
-			<Toolbar tools={[MoveTool, CreateTool]} />
-
 			<div class='nodemap-canvas' {...eventMap} style={styleVariables}>
 				{mapState.nodes.map((n) => {
 					return <TextNode key={n.id} {...n} />;
 				})}
 			</div>
 
+			<Toolbar tools={[MoveTool, CreateTool]} />
 			<NodePropertiesEditor />
 		</div>
 	);
