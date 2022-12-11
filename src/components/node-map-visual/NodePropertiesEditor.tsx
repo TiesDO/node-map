@@ -13,27 +13,6 @@ export type NodePropertiesEditorState = {
 
 export const NodePropertiesEditor = component$(() => {
 	const mapContext = useContext<NodeMapState>(NodeMapContext);
-	// const renderProps = $((id: string) => {
-	// 	// find the right node
-	// 	const nodeProps = mapContext.nodes.find((n) => n.id === id);
-	// 	const panel = document.querySelector('#propertyPanel');
-	// 	if (!panel || !nodeProps) {
-	// 		return;
-	// 	}
-	// 	panel.textContent = nodeProps.text;
-	// });
-	// 	useClientEffect$(({ track }) => {
-	// 		const displayTarget = track(() => mapContext.singleSelect);
-	// 		const panel = document.querySelector('#propertyPanel');
-	// 		if (!panel) {
-	// 			return;
-	// 		}
-	// 		if (displayTarget?.length === 0 || displayTarget === null) {
-	// 			panel.textContent = 'no props to display';
-	// 		} else {
-	// 			renderProps(displayTarget);
-	// 		}
-	// 	});
 
 	// find the current node
 	const state = useStore<NodePropertiesEditorState>({
