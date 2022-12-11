@@ -40,15 +40,26 @@ export const MoveTool: ToobarToolProps = {
 
 		//#region Dragging logic
 
+		let currentPos: { x: number; y: number } | null = null;
+
 		const startDrag = () => {
 			const nodeOffset = getElementRelativePosition(e, element);
 			window.onmouseup = () => {
 				canvas.onmousemove = null;
+				const nodeState = state.nodes.find((n) => n.id === state.singleSelect);
+
+				if (!nodeState || !currentPos) {
+					return;
+				}
+
+				nodeState.x = currentPos.x;
+				nodeState.y = currentPos.y;
 			};
 
 			canvas.onmousemove = (ev: MouseEvent) => {
 				const nextPosition = getElementRelativePosition(ev, canvas, nodeOffset);
 
+				currentPos = nextPosition;
 				element.style.left = nextPosition.x + 'px';
 				element.style.top = nextPosition.y + 'px';
 			};
