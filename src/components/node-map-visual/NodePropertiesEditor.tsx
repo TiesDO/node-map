@@ -52,11 +52,13 @@ export const NodePropertiesEditor = component$(() => {
 
 	return (
 		<div class='nodemap-properties-editor' id='propertyPanel'>
-			{state.activeNode
-				? state.properties.map((p) => (
-						<NodePropertyEdit key={p.propname} {...p} />
-				  ))
-				: 'no node selected'}
+			<div class='inner'>
+				{state.activeNode
+					? state.properties.map((p) => (
+							<NodePropertyEdit key={p.propname} {...p} />
+					  ))
+					: 'no node selected'}
+			</div>
 		</div>
 	);
 });
@@ -66,6 +68,18 @@ export type NodePropertyEditProps = {
 	state: any;
 };
 
+export type NodePropertyEditState = {};
+
 export const NodePropertyEdit = component$((props: NodePropertyEditProps) => {
-	return <input value={props.state[props.propname]} />;
+	return (
+		<>
+			<b>{props.propname}: </b>
+			<input
+				value={props.state[props.propname]}
+				onChange$={(e) => {
+					props.state[props.propname] = e.target.value;
+				}}
+			/>
+		</>
+	);
 });
