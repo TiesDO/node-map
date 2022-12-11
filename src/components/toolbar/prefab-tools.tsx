@@ -1,6 +1,6 @@
 import { $, QwikMouseEvent } from '@builder.io/qwik';
 import { getElementRelativePosition } from '../library/math';
-import { TextNodeProps } from '../node-map-visual/Node';
+import { BaseNodeProps } from '../node-map-visual/Node';
 import { NodeMapState } from '../node-map-visual/NodeMap';
 import { ToobarToolProps } from './toolbar';
 
@@ -120,11 +120,12 @@ export const CreateTool: ToobarToolProps = {
 		const placementPos = getElementRelativePosition(e, canvas);
 
 		// create a new node
-		const tempNodeProps: TextNodeProps = {
+		const tempNodeProps: BaseNodeProps = {
 			text: 'new Node',
 			id: v4(),
 			x: placementPos.x,
 			y: placementPos.y,
+			editable: ['text'],
 		};
 
 		// add node to context
