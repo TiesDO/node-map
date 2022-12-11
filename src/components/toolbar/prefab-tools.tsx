@@ -8,7 +8,7 @@ import { v4 } from 'uuid';
 
 export const MoveTool: ToobarToolProps = {
 	name: 'move',
-	onMouseDown$: $((e: QwikMouseEvent) => {
+	onMouseDown$: $((e: QwikMouseEvent, state: NodeMapState) => {
 		//#region start
 
 		const dragStartThreshold: number = 5;

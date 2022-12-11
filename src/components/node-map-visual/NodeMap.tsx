@@ -24,7 +24,8 @@ export type NodeMapState = {
 
 	nodes: TextNodeProps[];
 
-	selection: TextNodeProps[];
+	singleSelect: string | null;
+	multiSelect: string[];
 };
 
 export const NodeMapSettingsDefault: NodeMapState = {
@@ -35,7 +36,9 @@ export const NodeMapSettingsDefault: NodeMapState = {
 	activeTool: null,
 
 	nodes: [],
-	selection: [],
+
+	singleSelect: null,
+	multiSelect: [],
 };
 
 export const NodeMap = component$(() => {
