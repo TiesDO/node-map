@@ -130,5 +130,6 @@ export const CreateTool: ToobarToolProps = {
 
 		// add node to context
 		state.nodes.push(tempNodeProps);
+		state.singleSelect = tempNodeProps.id;
 	}),
 };
