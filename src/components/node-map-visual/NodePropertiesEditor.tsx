@@ -41,6 +41,7 @@ export const NodePropertiesEditor = component$(() => {
 		const props: NodePropertyEditProps[] = [];
 
 		for (const [key] of Object.entries(node)) {
+			if (!node.editable.includes(key)) continue;
 			props.push({
 				propname: key,
 				state: state.activeNode,
@@ -74,8 +75,8 @@ export const NodePropertyEdit = component$((props: NodePropertyEditProps) => {
 			<b>{props.propname}: </b>
 			<input
 				value={props.state[props.propname]}
-				onChange$={(e) => {
-					props.state[props.propname] = e.target.value;
+				onInput$={(e) => {
+					props.state[props.propname] = (e.target as HTMLInputElement).value;
 				}}
 			/>
 		</>

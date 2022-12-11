@@ -1,13 +1,14 @@
 import { component$ } from '@builder.io/qwik';
 
-export type TextNodeProps = {
+export interface BaseNodeProps {
 	text: string;
 	id: string;
 	x: number;
 	y: number;
-};
+	editable: string[];
+}
 
-export const TextNode = component$((props: TextNodeProps) => {
+export const TextNode = component$((props: BaseNodeProps) => {
 	return (
 		<div
 			id={props.id}

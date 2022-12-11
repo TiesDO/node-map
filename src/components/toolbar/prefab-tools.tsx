@@ -1,6 +1,6 @@
 import { $, QwikMouseEvent } from '@builder.io/qwik';
 import { getElementRelativePosition } from '../library/math';
-import { TextNodeProps } from '../node-map-visual/Node';
+import { BaseNodeProps } from '../node-map-visual/Node';
 import { NodeMapState } from '../node-map-visual/NodeMap';
 import { ToobarToolProps } from './toolbar';
 
@@ -40,15 +40,26 @@ export const MoveTool: ToobarToolProps = {
 
 		//#region Dragging logic
 
+		let currentPos: { x: number; y: number } | null = null;
+
 		const startDrag = () => {
 			const nodeOffset = getElementRelativePosition(e, element);
 			window.onmouseup = () => {
 				canvas.onmousemove = null;
+				const nodeState = state.nodes.find((n) => n.id === state.singleSelect);
+
+				if (!nodeState || !currentPos) {
+					return;
+				}
+
+				nodeState.x = currentPos.x;
+				nodeState.y = currentPos.y;
 			};
 
 			canvas.onmousemove = (ev: MouseEvent) => {
 				const nextPosition = getElementRelativePosition(ev, canvas, nodeOffset);
 
+				currentPos = nextPosition;
 				element.style.left = nextPosition.x + 'px';
 				element.style.top = nextPosition.y + 'px';
 			};
@@ -109,11 +120,12 @@ export const CreateTool: ToobarToolProps = {
 		const placementPos = getElementRelativePosition(e, canvas);
 
 		// create a new node
-		const tempNodeProps: TextNodeProps = {
+		const tempNodeProps: BaseNodeProps = {
 			text: 'new Node',
 			id: v4(),
 			x: placementPos.x,
 			y: placementPos.y,
+			editable: ['text'],
 		};
 
 		// add node to context

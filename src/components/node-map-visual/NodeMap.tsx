@@ -10,7 +10,7 @@ import {
 import { ToobarToolProps, Toolbar } from '../toolbar/toolbar';
 import { CreateTool, MoveTool } from '../toolbar/prefab-tools';
 import mainStyle from './nodemap.css?inline';
-import { TextNode, TextNodeProps } from './Node';
+import { TextNode, BaseNodeProps } from './Node';
 import { NodePropertiesEditor } from './NodePropertiesEditor';
 
 export const NodeMapContext = createContext<NodeMapState>('nodemap');
@@ -22,7 +22,7 @@ export type NodeMapState = {
 
 	activeTool: ToobarToolProps | null;
 
-	nodes: TextNodeProps[];
+	nodes: BaseNodeProps[];
 
 	singleSelect: string | null;
 	multiSelect: string[];
