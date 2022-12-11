@@ -47,9 +47,9 @@ export const MoveTool: ToobarToolProps = {
 
 		//#endregion
 
-		// check if the user moves
 		const initialClickPos = { x: e.clientX, y: e.clientY };
 
+		// check if the threshold is met before starting drag behaviour
 		element.onmousemove = (ev: MouseEvent) => {
 			const delta = {
 				x: Math.abs(initialClickPos.x - ev.clientX),
@@ -62,6 +62,7 @@ export const MoveTool: ToobarToolProps = {
 			}
 		};
 
+		// reset when the user releases it's mouse
 		element.onmouseup = () => {
 			element.onmousemove = null;
 		};
