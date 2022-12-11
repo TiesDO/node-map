@@ -9,7 +9,12 @@ import { v4 } from 'uuid';
 export const MoveTool: ToobarToolProps = {
 	name: 'move',
 	onMouseDown$: $((e: QwikMouseEvent, state: NodeMapState) => {
-		//#region start
+		// only execute on left mb
+		if (e.button !== 0) {
+			return;
+		}
+
+		//#region Element finding
 
 		const dragStartThreshold: number = 5;
 
@@ -17,6 +22,10 @@ export const MoveTool: ToobarToolProps = {
 
 		// check if event target is a node
 		if (!element.classList.contains('node')) {
+			// clear selection
+			state.singleSelect = null;
+			state.multiSelect = [];
+
 			return;
 		}
 
@@ -47,6 +56,8 @@ export const MoveTool: ToobarToolProps = {
 
 		//#endregion
 
+		//#region Validate Drag Threshold
+
 		const initialClickPos = { x: e.clientX, y: e.clientY };
 
 		// check if the threshold is met before starting drag behaviour
@@ -66,12 +77,29 @@ export const MoveTool: ToobarToolProps = {
 		element.onmouseup = () => {
 			element.onmousemove = null;
 		};
+
+		//#endregion
+
+		//#region Select Item
+
+		// if node is already selected don't add it
+		if (state.singleSelect === element.id) {
+			return;
+		} else {
+			state.singleSelect = element.id;
+		}
+
+		//#endregion
 	}),
 };
 
 export const CreateTool: ToobarToolProps = {
 	name: 'create',
 	onMouseDown$: $((e: QwikMouseEvent, state: NodeMapState) => {
+		if (e.button !== 0) {
+			return;
+		}
+
 		const canvas = (e.target as HTMLElement).closest<HTMLElement>(
 			'.nodemap-canvas'
 		);
