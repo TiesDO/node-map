@@ -23,6 +23,9 @@ export type NodeMapState = {
 	activeTool: ToobarToolProps | null;
 
 	nodes: TextNodeProps[];
+
+	singleSelect: string | null;
+	multiSelect: string[];
 };
 
 export const NodeMapSettingsDefault: NodeMapState = {
@@ -33,6 +36,9 @@ export const NodeMapSettingsDefault: NodeMapState = {
 	activeTool: null,
 
 	nodes: [],
+
+	singleSelect: null,
+	multiSelect: [],
 };
 
 export const NodeMap = component$(() => {
@@ -66,7 +72,7 @@ export const NodeMap = component$(() => {
 
 			<div class='nodemap-canvas' {...eventMap} style={styleVariables}>
 				{mapState.nodes.map((n) => {
-					return <TextNode {...n} />;
+					return <TextNode key={n.id} {...n} />;
 				})}
 			</div>
 

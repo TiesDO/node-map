@@ -4,7 +4,7 @@
 
 .nodemap-container {
 	display: grid;
-	grid-template-columns: 50px 1fr 200px;
+	grid-template-columns: 50px 1fr 300px;
 
 	width: 100%;
 	height: 100%;
@@ -14,7 +14,21 @@
 }
 
 .nodemap-properties-editor {
-	background-color: blue;
+	background-color: white;
+}
+
+.nodemap-properties-editor .inner {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: min-content;
+
+	gap: 0.6rem;
+
+	padding: 2rem 1rem;
+}
+
+.nodemap-properties-editor .inner b {
+	margin-right: 1rem;
 }
 
 .nodemap-canvas {
