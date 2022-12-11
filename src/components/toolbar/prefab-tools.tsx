@@ -1,6 +1,6 @@
 import { $, QwikMouseEvent } from '@builder.io/qwik';
 import { getElementRelativePosition } from '../library/math';
-import { BaseNodeProps } from '../node-map-visual/Node';
+import { BaseNodeDefaultStyle, BaseNodeProps } from '../node-map-visual/Node';
 import { NodeMapState } from '../node-map-visual/NodeMap';
 import { ToobarToolProps } from './toolbar';
 
@@ -125,10 +125,13 @@ export const CreateTool: ToobarToolProps = {
 			id: v4(),
 			x: placementPos.x,
 			y: placementPos.y,
-			editable: ['text'],
+			editable: ['text', 'backgroundColor', 'fontColor', 'borderColor'],
+
+			...BaseNodeDefaultStyle,
 		};
 
 		// add node to context
 		state.nodes.push(tempNodeProps);
+		state.singleSelect = tempNodeProps.id;
 	}),
 };
