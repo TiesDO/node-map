@@ -22,22 +22,33 @@ export type ToolbarState = {
 	x: number;
 	y: number;
 	inDrag: boolean;
+	isOpen: boolean;
 };
 
 export const ToolbarDefaultState = {
 	x: 15,
 	y: 15,
 	inDrag: false,
+	isOpen: true,
 };
 
 export const Toolbar = component$((props: ToolbarProps) => {
 	useStyles$(toolbarStyle);
+	const toolbarEl = useSignal<HTMLDivElement>();
 
 	// set the default state
 	const state = useStore(ToolbarDefaultState);
 
 	return (
-		<div class='toolbar' style={`--px: ${state.x}px; --py: ${state.y}px`}>
+		<div
+			class='toolbar'
+			ref={toolbarEl}
+			style={`--px: ${state.x}px; --py: ${state.y}px`}>
+			<div
+				class='header'
+				onDblClick$={() => {
+					toolbarEl.value?.classList.toggle('collapsed');
+				}}></div>
 			{props.tools.map((t) => {
 				return <ToolbarTool key={t.name} {...t} />;
 			})}
