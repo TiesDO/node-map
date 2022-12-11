@@ -50,15 +50,13 @@ export const NodePropertiesEditor = component$(() => {
 		state.properties = props;
 	});
 
+	const properties = state.activeNode
+		? state.properties.map((p) => <NodePropertyEdit key={p.propname} {...p} />)
+		: 'no node selected';
+
 	return (
 		<div class='nodemap-properties-editor' id='propertyPanel'>
-			<div class='inner'>
-				{state.activeNode
-					? state.properties.map((p) => (
-							<NodePropertyEdit key={p.propname} {...p} />
-					  ))
-					: 'no node selected'}
-			</div>
+			<div class='inner'>{properties}</div>
 		</div>
 	);
 });
