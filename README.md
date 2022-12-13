@@ -1,47 +1,114 @@
-# Qwik Library ⚡️
+# Nodemap Library
 
-- [Qwik Docs](https://qwik.builder.io/)
-- [Discord](https://qwik.builder.io/chat)
-- [Qwik on GitHub](https://github.com/BuilderIO/qwik)
-- [@QwikDev](https://twitter.com/QwikDev)
-- [Vite](https://vitejs.dev/)
-- [Partytown](https://partytown.builder.io/)
-- [Mitosis](https://github.com/BuilderIO/mitosis)
-- [Builder.io](https://www.builder.io/)
+A simple node map editor with base components that can be configured or extended.
 
----
+## Usage
+
+Note this is a [Qwik](https://qwik.builder.io/) library which you can download as a package from [NPM](https://www.npmjs.com/package/@tiesdenouden/node-map) or directly install using the command line with:
+
+```shell
+npm install @tiesdenouden/node-map
+```
+
+> :warning: These components are still being developed and are **subject to change**!
+
+### Basic component
+
+After you've succesfully installed the package you can then use the out of the box component like so:
+
+```JSX
+import { component$, useContext } from 'builder.io/qwik';
+
+// import the library
+import { NodeMap } from 'tiesdenouden@node-map';
+
+export const DefaultSettings = component$(() => {
+  // provide your own context to allow
+  // - easy access and manipulation from outside the component
+  // - multiple map contexts within the app
+
+  const nodeMapState = useContext<INodeMapState>(MyAppContext);
+
+  // the base parent component with default settings
+  return <NodeMap context={nodeMapState}/>
+});
+
+export const DefaultSettings = component$(() => {
+  // provide your own context to allow
+  // - easy access and manipulation from outside the component
+  // - multiple map contexts within the app
+
+  const nodeMapState = useContext<INodeMapState>(MyAppContext);
+
+  // the base parent component with default settings
+  return <NodeMap context={nodeMapState}/>
+});
+```
+
+### Custom tool
+
+You can inherit the `INodeTool` to easily create a new tool.
+
+```JSX
+import { $, QwikMouseEvent } from 'builder.io/qwik';
+
+import { INodeTool, NodeTool } from 'tiesdenouden@node-map';
+
+export const CustomTool = () => {
+  const customProps: INodeTool = {
+    name: 'My Custom Tool',
+    icon: '/path/to/icon',
+
+    // on mouse down event takes a $ wrapped function. This allows Qwik to serialise and lazy load the tools behaviour
+    onMouseDown: $((e: QwikMouseEvent) => {
+      console.log(`clicked at (${e.clientX};${e.clientY})`);
+    })
+  }
+
+  // return a new NodeTool component with your own event handlers
+  return <NodeTool {...customProps} />
+}
+```
 
 ## Project Structure
 
-Inside of you project, you'll see the following directories and files:
+The library should provide users with a simple component that works out of the box and can be supplied with `custom components` as needed.
 
+```txt
+- nodemap component
+  - property editor
+    - node property [interface]
+    - node string property *
+    - node decimal property *
+    - node integer property *
+    - node enum property *
+    - node color property *
+  - toolbar
+    - base tool [interface]
+    - move tool *
+    - create tool *
+    - pan/zoom tool *
+    - pan/zoom tool *
+  - canvas
+    - base node [interface]
+    - text node *
 ```
-├── public/
-│   └── ...
-└── src/
-    ├── components/
-    │   └── ...
-    └── index.ts
-```
 
-- `src/components`: Recommended directory for components.
+\* Preconfigured optional components \
+[_interface_] extendable interfaces
 
-- `index.ts`: This is the entry point of your component library, make sure all the public components are exported from this file.
+## Prototype 1 (0.1.0)
 
-## Development
+It's first minor version should allow a user to:
 
-Development mode uses [Vite's development server](https://vitejs.dev/). For Qwik during development, the `dev` command will also server-side render (SSR) the output. The client-side development modules loaded by the browser.
+- Import the component into their project
+- Property editor provides (c)RUD functionality
+- Out of the box tools should provide all CR(ud) functionality and relations
+- Base node should allow for:
+  - Colors
+  - Text
+  - Node relations
 
-```
-npm run dev
-```
-
-> Note: during dev mode, Vite will request many JS files, which does not represent a Qwik production build.
-
-## Production
-
-The production build should generate the production build of your component library in (./lib) and the typescript type definitions in (./lib-types).
-
-```
-npm run build
+```txt
+possible useacases are an 'SQL database explorer' and a 'Project Service designer'
 ```
