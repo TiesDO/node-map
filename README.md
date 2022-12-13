@@ -110,5 +110,5 @@ It's first minor version should allow a user to:
   - Node relations
 
 ```txt
-possible useacases are an 'SQL database explorer' and a 'Project Service designer'
+possible usecases are an 'SQL database explorer' and a 'Project Service designer'
 ```
