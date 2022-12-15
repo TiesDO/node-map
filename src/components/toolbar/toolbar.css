@@ -24,7 +24,7 @@
 	height: 10px;
 	background-color: var(--dbg-h);
 
-	cursor: move;
+	cursor: pointer;
 }
 
 .toolbar.collapsed {
