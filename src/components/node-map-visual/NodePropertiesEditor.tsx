@@ -4,6 +4,7 @@ import {
 	useClientEffect$,
 	useContext,
 	useStore,
+	useSignal,
 } from '@builder.io/qwik';
 import { NodeMapContext, NodeMapState } from './NodeMap';
 
@@ -23,6 +24,8 @@ export const NodePropertiesEditor = component$(() => {
 		activeNode: null,
 		properties: [],
 	});
+
+	const editorEl = useSignal<HTMLDivElement>();
 
 	useClientEffect$(({ track }) => {
 		const targetId = track(() => mapContext.singleSelect);
@@ -60,8 +63,14 @@ export const NodePropertiesEditor = component$(() => {
 		: 'no node selected';
 
 	return (
-		<div class='nodemap-properties-editor' id='propertyPanel'>
-			<div class='header'>properties</div>
+		<div class='nodemap-properties-editor' id='propertyPanel' ref={editorEl}>
+			<div
+				class='header'
+				onDblClick$={() => {
+					editorEl.value?.classList.toggle('collapsed');
+				}}>
+				properties
+			</div>
 			<div class='inner'>{properties}</div>
 		</div>
 	);
