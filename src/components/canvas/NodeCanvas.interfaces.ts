@@ -1,9 +1,5 @@
-export interface NodeCanvasProps {
-	nodeStyles: INodeColorScheme;
-}
+import { INodeColorScheme } from '../base-node/Node.interfaces';
 
-export interface INodeColorScheme {
-	nodeBackgroundColor: string;
-	nodeFontColor: string;
-	nodeBorderColor: string;
+export interface NodeCanvasProps {
+	nodeBaseStyle: INodeColorScheme;
 }
