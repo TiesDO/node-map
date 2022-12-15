@@ -1,0 +1,18 @@
+.node {
+	--cursor: default;
+
+	cursor: var(--cursor);
+
+	position: absolute;
+
+	padding: 1.5rem;
+	background-color: white;
+
+	width: max-content;
+	height: max-content;
+
+	user-select: none;
+
+	border: 1px solid white;
+	border-radius: 0.5rem;
+}

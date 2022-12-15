@@ -1,16 +1,5 @@
 import { component$ } from '@builder.io/qwik';
-
-export interface BaseNodeProps {
-	text: string;
-	id: string;
-	x: number;
-	y: number;
-	editable: string[];
-
-	fontColor: string;
-	backgroundColor: string;
-	borderColor: string;
-}
+import { BaseNodeProps } from './Node.interfaces';
 
 export const BaseNodeDefaultStyle = {
 	fontColor: '#000000',
@@ -18,7 +7,7 @@ export const BaseNodeDefaultStyle = {
 	borderColor: '#ffffff',
 };
 
-export const TextNode = component$((props: BaseNodeProps) => {
+export const BaseNode = component$((props: BaseNodeProps) => {
 	const styling = {
 		left: `${props.x}px`,
 		top: `${props.y}px`,
