@@ -21,6 +21,10 @@
 	overflow: scroll;
 }
 
+.nodemap-properties-editor.collapsed {
+	overflow: hidden;
+}
+
 .nodemap-properties-editor .header {
 	padding: 0.2rem 1rem;
 
@@ -35,6 +39,10 @@
 	gap: 0.6rem;
 
 	padding: 2rem 1rem;
+}
+
+.nodemap-properties-editor.collapsed .inner {
+	display: none;
 }
 
 .nodemap-properties-editor .inner b {
