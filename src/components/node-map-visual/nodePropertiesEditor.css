@@ -1,6 +1,8 @@
 .nodemap-container {
 	position: relative;
 
+	--header-bg: #ccc;
+
 	overflow: hidden;
 
 	width: 100%;
@@ -21,6 +23,8 @@
 
 .nodemap-properties-editor .header {
 	padding: 0.2rem 1rem;
+
+	background-color: var(--header-bg);
 }
 
 .nodemap-properties-editor .inner {
