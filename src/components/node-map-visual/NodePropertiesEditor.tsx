@@ -1,10 +1,13 @@
 import {
 	component$,
+	useStyles$,
 	useClientEffect$,
 	useContext,
 	useStore,
 } from '@builder.io/qwik';
 import { NodeMapContext, NodeMapState } from './NodeMap';
+
+import editorStyles from './NodePropertiesEditor.css?inline';
 
 export type NodePropertiesEditorState = {
 	activeNode: any;
@@ -12,6 +15,7 @@ export type NodePropertiesEditorState = {
 };
 
 export const NodePropertiesEditor = component$(() => {
+	useStyles$(editorStyles);
 	const mapContext = useContext<NodeMapState>(NodeMapContext);
 
 	// find the current node
