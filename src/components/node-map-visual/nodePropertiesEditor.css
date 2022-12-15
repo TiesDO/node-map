@@ -19,6 +19,10 @@
 	overflow: scroll;
 }
 
+.nodemap-properties-editor .header {
+	padding: 0.2rem 1rem;
+}
+
 .nodemap-properties-editor .inner {
 	display: grid;
 	grid-template-columns: auto 1fr;
