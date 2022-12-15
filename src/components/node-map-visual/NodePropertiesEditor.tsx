@@ -7,7 +7,7 @@ import {
 } from '@builder.io/qwik';
 import { NodeMapContext, NodeMapState } from './NodeMap';
 
-import editorStyles from './NodePropertiesEditor.css?inline';
+import editorStyles from './nodePropertiesEditor.css?inline';
 
 export type NodePropertiesEditorState = {
 	activeNode: any;
@@ -61,6 +61,7 @@ export const NodePropertiesEditor = component$(() => {
 
 	return (
 		<div class='nodemap-properties-editor' id='propertyPanel'>
+			<div class='header'>properties</div>
 			<div class='inner'>{properties}</div>
 		</div>
 	);
