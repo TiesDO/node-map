@@ -1,11 +1,22 @@
+import { Vector2 } from '../lib/math';
+
 export interface BaseNodeProps {
-	text: string;
 	id: string;
-	x: number;
-	y: number;
 	editable: string[];
 
-	fontColor: string;
-	backgroundColor: string;
-	borderColor: string;
+	meta: INodeMeta;
+
+	position: Vector2;
+
+	styles: INodeColorScheme;
+}
+
+export interface INodeMeta {
+	text: string;
+}
+
+export interface INodeColorScheme {
+	nodeBackgroundColor: string;
+	nodeFontColor: string;
+	nodeBorderColor: string;
 }

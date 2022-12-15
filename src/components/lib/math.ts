@@ -3,8 +3,8 @@ import { QwikMouseEvent } from '@builder.io/qwik';
 export const getElementRelativePosition = (
 	e: MouseEvent | QwikMouseEvent,
 	container: HTMLElement,
-	offset: { x: number; y: number } = { x: 0, y: 0 }
-): { x: number; y: number } => {
+	offset: Vector2 = { x: 0, y: 0 }
+): Vector2 => {
 	const boundingRect = container.getBoundingClientRect();
 
 	return {
@@ -12,3 +12,8 @@ export const getElementRelativePosition = (
 		y: e.clientY - boundingRect.y - offset.y,
 	};
 };
+
+export interface Vector2 {
+	x: number;
+	y: number;
+}

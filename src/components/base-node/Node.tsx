@@ -9,17 +9,17 @@ export const BaseNodeDefaultStyle = {
 
 export const BaseNode = component$((props: BaseNodeProps) => {
 	const styling = {
-		left: `${props.x}px`,
-		top: `${props.y}px`,
+		left: `${props.position.x}px`,
+		top: `${props.position.y}px`,
 
-		color: props.fontColor,
-		backgroundColor: props.backgroundColor,
-		borderColor: props.borderColor,
+		color: props.styles.nodeFontColor,
+		backgroundColor: props.styles.nodeBackgroundColor,
+		borderColor: props.styles.nodeBorderColor,
 	};
 
 	return (
 		<div id={props.id} class='node' style={styling}>
-			{props.text}
+			{props.meta.text}
 		</div>
 	);
 });
