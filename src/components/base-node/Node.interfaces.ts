@@ -8,7 +8,7 @@ export interface BaseNodeProps {
 
 	position: Vector2;
 
-	styles: INodeColorScheme;
+	styles?: INodeColorScheme;
 }
 
 export interface INodeMeta {
@@ -20,3 +20,9 @@ export interface INodeColorScheme {
 	nodeFontColor: string;
 	nodeBorderColor: string;
 }
+
+export const NodeColorSchemeDefault = {
+	nodeBackgroundColor: '#ffffff',
+	nodeBorderColor: '#000000',
+	nodeFontColor: '#000000',
+};

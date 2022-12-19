@@ -1,12 +1,35 @@
-import { component$, useStyles$, useStylesScoped$ } from '@builder.io/qwik';
-import { NodeMapProps } from './NodeMap.interfaces';
+import {
+	component$,
+	useStylesScoped$,
+	Slot,
+	useContextProvider,
+	useStore,
+} from '@builder.io/qwik';
 
 import mapStyles from './nodeMap.css?inline';
-import globalStyles from './globalStyle.css?inline';
+import {
+	NodeMapProps,
+	NodeMapState,
+	NodeMapStateDefault,
+} from './NodeMap.interfaces';
 
+/***
+ *  Component
+ */
 export const NodeMap = component$((props: NodeMapProps) => {
 	useStylesScoped$(mapStyles);
-	useStyles$(globalStyles);
 
-	return <div class='node-map'></div>;
+	const state = useStore<NodeMapState>(
+		props.initialState ?? NodeMapStateDefault,
+		{ recursive: true }
+	);
+
+	// provide context for all the children
+	useContextProvider(props.context, state);
+
+	return (
+		<div class='node-map'>
+			<Slot />
+		</div>
+	);
 });

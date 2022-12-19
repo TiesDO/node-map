@@ -1,11 +1,14 @@
-import { component$ } from '@builder.io/qwik';
+import { component$, useContext } from '@builder.io/qwik';
 import { NodeCanvasProps } from './NodeCanvas.interfaces';
+import { NodeMapState } from '../container/NodeMap.interfaces';
 
 export const NodeCanvas = component$((props: NodeCanvasProps) => {
+	const state: NodeMapState = useContext(props.context);
+
 	return (
-		<div class='nodemap-canvas' {...eventMap} style={styleVariables}>
-			{mapState.nodes.map((n) => {
-				return <TextNode key={n.id} {...n} />;
+		<div class='nodemap-canvas'>
+			{state.nodes.map((n) => {
+				return <div>{n.meta.text}</div>;
 			})}
 		</div>
 	);

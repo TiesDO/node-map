@@ -12,9 +12,9 @@ export const BaseNode = component$((props: BaseNodeProps) => {
 		left: `${props.position.x}px`,
 		top: `${props.position.y}px`,
 
-		color: props.styles.nodeFontColor,
-		backgroundColor: props.styles.nodeBackgroundColor,
-		borderColor: props.styles.nodeBorderColor,
+		color: props.styles?.nodeFontColor,
+		backgroundColor: props.styles?.nodeBackgroundColor,
+		borderColor: props.styles?.nodeBorderColor,
 	};
 
 	return (
