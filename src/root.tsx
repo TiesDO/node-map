@@ -3,6 +3,7 @@ import { NodeCanvas } from './components/canvas/NodeCanvas';
 import { NodeMap } from './components/container/NodeMap';
 import { NodeMapState } from './components/container/NodeMap.interfaces';
 import { NodeBox } from './components/nodebox/NodeBox';
+import { PropertyEditor } from './components/prop-editor/PropertyEditor';
 
 export default () => {
 	// Create a context of the NodeMapState type
@@ -19,6 +20,7 @@ export default () => {
 
 				<NodeMap context={NodeMapContext}>
 					<NodeBox context={NodeMapContext} />
+					<PropertyEditor context={NodeMapContext} />
 					<NodeCanvas context={NodeMapContext} />
 				</NodeMap>
 			</body>

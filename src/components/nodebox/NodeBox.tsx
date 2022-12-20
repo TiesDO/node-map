@@ -22,8 +22,6 @@ export const NodeBox = component$((props: NodeBoxProps) => {
 
 						position: { x: 300, y: 300 },
 					});
-
-					console.log(state.nodes);
 				}}>
 				Default node
 			</li>
