@@ -1,9 +1,16 @@
-import { createContext, useContext } from '@builder.io/qwik';
+import {
+	$,
+	Context,
+	QwikMouseEvent,
+	createContext,
+	useContext,
+} from '@builder.io/qwik';
 import { NodeCanvas } from './components/canvas/NodeCanvas';
 import { NodeMap } from './components/container/NodeMap';
 import { NodeMapState } from './components/container/NodeMap.interfaces';
 import { NodeBox } from './components/nodebox/NodeBox';
 import { PropertyEditor } from './components/prop-editor/PropertyEditor';
+import { Toolbar } from './components/toolbar/Toolbar';
 
 export default () => {
 	// Create a context of the NodeMapState type
@@ -22,6 +29,18 @@ export default () => {
 					<NodeBox context={NodeMapContext} />
 					<PropertyEditor context={NodeMapContext} />
 					<NodeCanvas context={NodeMapContext} />
+					<Toolbar
+						context={NodeMapContext}
+						tools={[
+							{
+								name: 'select',
+								onClick: $((ev: QwikMouseEvent) => {
+									console.warn('tool is beign used');
+									console.log(ev);
+								}),
+							},
+						]}
+					/>
 				</NodeMap>
 			</body>
 		</>
